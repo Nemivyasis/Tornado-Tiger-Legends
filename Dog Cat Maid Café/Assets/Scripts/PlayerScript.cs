@@ -4,22 +4,50 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
 
+    private Transform inventoryFood;
+
+    private bool hasFood;
+
 	// Use this for initialization
 	void Start () {
         //so what do we do here? 
-		
+        hasFood = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        // I guess I am looking for if left ctrl is held
-        bool selectButton = Input.GetButton("Fire1");
 
-        if (selectButton)
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //make sure it is a food table
+        //almost certainly a better way to do this
+        if(collision.collider.name == "FoodTable")
         {
-            
+            FoodTableScript script = collision.collider.GetComponent<FoodTableScript>();
+
+            if(inventoryFood == null)
+            {
+                inventoryFood = script.RemoveFood();
+
+                //actually make this properly calculated
+                inventoryFood.position = new Vector3(-9.6f, 4.8f, -1);
+
+                hasFood = true;
+            }
         }
-	}
 
+        else if(collision.collider.name == "CustomerTable")
+        {
+            //remove the food
+            if(hasFood)
+            {
+                Destroy(inventoryFood, 0);
 
+                hasFood = false;
+            }
+
+        }
+    }
 }
