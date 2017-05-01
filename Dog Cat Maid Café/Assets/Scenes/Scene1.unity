@@ -1262,6 +1262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b759e755cb3eda44e86e502bba9a0168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnRateSeconds: 5
   foodSprite: {fileID: 4547955708811266, guid: 396fc218484ca694b8e224019759b94c, type: 2}
 --- !u!1 &556349653
 GameObject:
